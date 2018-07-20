@@ -1,0 +1,48 @@
+body {
+  font-family:  'Open Sans', sans-serif;
+  font-size: 14px;
+}
+.card {
+  width: 300px;
+  margin:0 auto;
+  padding: 0 15px 15px 15px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 25px 30px -10px rgba(0, 0, 0, 0.2);
+  transition: box-shadow .3s;
+}
+.card:hover{  
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.1);
+}
+.card__img {
+  padding-bottom: 10px;
+  display: block;
+  cursor: pointer;
+}
+.card__description {
+  background: lightyellow;
+  color: black;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 0 15px 15px 15px;
+}
+.card__fact {
+  font-style: italic;
+  font-size: 12px;
+}
+.card__specs {
+  list-style: none;
+  padding: 0;
+}
+.card__specs_item_name {
+  font-weight: 800;
+  font-family: 'Limelight', cursive;
+  text-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+}
+.card h3{
+  font-family: 'Limelight', cursive;
+  font-size: 25px;
+  text-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+}
+.clicks__displayed{
+  display: block;
+  font-size: 72px;
+}
