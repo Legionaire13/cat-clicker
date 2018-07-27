@@ -1,4 +1,4 @@
-# Project Requirements for Cat Clicker
+# Project Requirements for Cat Clicker Premium
 ## Visuals
 * The application should display
   * a list of cats by name
