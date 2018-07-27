@@ -1,56 +1,129 @@
-let catArr = [];
-class Cat {
-    constructor(name) {
-        this.name = name;
-        this.clicksNumber = 0;
-        this.imgSource = "http://99px.ru/sstorage/86/2015/09/image_861809151414179543807.gif";
-        this.clickCount = function(event) {
-            console.log(this, event.target, this.clicksNumber);
-            this.clicksNumber += 1;
-            (this.clicksNumber < 10) ? 
-            event.target.nextSibling.nextSibling.querySelector(`.${this.name} .clicks__displayed`).innerHTML = `0${this.clicksNumber}` : 
-            event.target.nextSibling.nextSibling.querySelector(`.${this.name} .clicks__displayed`).innerHTML = `${this.clicksNumber}`;
-            console.log(`${this}, ${this.clicksNumber}`);
+var catView = {
+    init: function() {
+        // раскладываем привязки по переменным
+        this.catElem = document.getElementById("cat");
+        this.catNameElem = document.getElementById("cat-placeholder__name");
+        this.catImageElem = document.getElementById("cat-placeholder__img");
+        this.catCountElem = document.getElementById("cat-placeholder__clicks");
 
-        }
+        // добавляем слушатель кликов по котам
+        this.catImageElem.addEventListener("click", function() {
+            octopus.incrementCounter();
+        });
+
+        // рендерим однократно для отображения результата
+        this.render();
+    },
+
+    render: function(){
+        // присваиваем текущие значения по ДОМ элементам
+        var currentCat = octopus.getCurrentCat();
+        this.catCountElem.textContent = currentCat.clickCounter;
+        this.catNameElem.textContent = currentCat.name;
+        this.catImageElem.src = currentCat.imgSrc;
     }
-    
-    // clickCount() {
-    //     (this.clicksNumber < 10) ? 
-    //     this.nextSibling.nextSibling.querySelector(".clicks__displayed").innerHTML = `0${this.clicksNumber}` : 
-    //     this.nextSibling.nextSibling.querySelector(".clicks__displayed").innerHTML = `${this.clicksNumber}`;
-    //     console.log(`${this}, ${this.clicksNumber}`);
-    // }
-}
+};
 
-function catInit(name) {
-    const cat = new Cat(name);
-    
-    //убираем кота в котомассив
-    catArr.push(cat);
 
-    let desk = document.querySelector("body"),
-        fragment = document.createDocumentFragment(),
-        card = document.createElement("div");
+catListView = {
+    init: function() {
+        // кладем ДОМэлемент для удобства доступа
+        this.catListElem = document.getElementById("selection_list");
 
-    card.classList.add(`card`, `${cat.name}`);
-    card.innerHTML = `
-    <h3>${cat.name} the Cat</h3>
-    <img class="card__img" src=${cat.imgSource} alt="Tom the cat dancing in cabaret show" width=300>
-    <div class="card__description">
-    <p class="card__fact">Outnumber the number of clicks performed by clicking this cat in this "Cat-Clicker" project</p>
-    <ul class="card__specs">
-    <li class="card__specs_item"><span class="card__specs_item_name">CLICKS performed:</span><span class="clicks__displayed card__specs_item_name">00</span></li>
-    </ul>
-    </div>`;
-    fragment.appendChild(card);
-    desk.appendChild(fragment);
+        // рендерим дом элемент
+        this.render();
+    },
 
-    cat.clickListener = document.querySelector(`.${cat.name} .card__img`);
-    // console.log(`click listener is: ${cat.clickListener}`);
-    cat.clickListener.addEventListener('click', cat.clickCount, false);
-    console.log(`${cat.name} initialized`);
-}
+    render: function() {
+        // получаем массив с котами (забираем их из модели)
+        var cats = octopus.getCats();
 
-catInit("Tom");
-catInit("Groover");
+        // очищаем список котов в HTML
+        this.catListElem.innerHTML = "";
+
+        // проходим циклом по списку 
+        for (var cat of cats) {
+            //создаем новый список в HTML
+            let elem = document.createElement("li");
+            elem.textContent = cat.name;
+
+            //по клику ставим срабатываение ментода setCurrentCat и рендерим catView
+            elem.addEventListener("click", (function(cat) {
+                return function() {
+                    octopus.setCurrentCat(cat);
+                    catView.render();
+                }
+            })(cat));
+
+            //добавляем элемент в список
+            this.catListElem.appendChild(elem);
+        };
+    }
+};
+
+
+var model = {
+    currentCat: null,
+    cats: [
+        {
+            name: "Tom",
+            clickCounter: 0,
+            imgSrc: "img/Tom.jpg"
+        },
+        {
+            name: "Andy",
+            clickCounter: 0,
+            imgSrc: "img/Andy.jpg"
+        },
+        {
+            name: "Laslo",
+            clickCounter: 0,
+            imgSrc: "img/Laslo.png"
+        },
+        {
+            name: "Dilan",
+            clickCounter: 0,
+            imgSrc: "img/Dilan.png"
+        },
+        {
+            name: "Ron",
+            clickCounter: 0,
+            imgSrc: "img/Ron.jpg"
+        }
+    ]
+};
+
+
+var octopus = {
+    init: function(){
+        // текущий кот
+        model.currentCat = model.cats[0];
+        
+        // запускаем приложение
+        catListView.init();
+        catView.init();
+    },
+
+    // upd текущего кота
+    getCurrentCat: function() {
+        return model.currentCat;
+    },
+
+    // upd массива с котами
+    getCats: function() {
+        return model.cats;
+    },
+
+    // upd нового кота
+    setCurrentCat: function(cat) {
+        return model.currentCat = cat;
+    },
+
+    // функция счетчика кликов 
+    incrementCounter: function() {
+        model.currentCat.clickCounter++;
+        catView.render();
+    }
+};
+
+octopus.init();

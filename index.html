@@ -3,13 +3,23 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Cat Clicker project</title>
+  <title>Cat Clicker Premium project</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Limelight|Open+Sans">
 </head>
 
 <body>
-  
+  <!-- cats list  view-->
+  <ul id="selection_list" class="selection_list"></ul>
+
+  <!-- cat view -->
+  <div id="cat" class="cat">
+    <h2 id="cat-placeholder__name" class="cat-placeholder__name" ></h2>
+    <div id="cat-placeholder__clicks" class="cat-placeholder__clicks" ></div>
+    <img id="cat-placeholder__img"  class="cat-placeholder__img" src="" alt="a cat to click">
+  </div>
+
   <script src="js/app.js"></script>
 </body>
+
 </html>
