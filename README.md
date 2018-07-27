@@ -1,13 +1,13 @@
 # Project Requirements for Cat Clicker
 ## Visuals
 * The application should display
-** a list of cats by name
-** an area to display the selected cat
+  * a list of cats by name
+  * an area to display the selected cat
 
 * In the cat display area, the following should be displayed
-** the cat's name
-** a picture of the cat
-** text showing the number of clicks
+  * the cat's name
+  * a picture of the cat
+  * text showing the number of clicks
 
 * The specifics of the layout do not matter, so style it however you'd like.
 
