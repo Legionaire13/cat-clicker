@@ -11,10 +11,6 @@
   * the cat's name
   * a picture of the cat
   * text showing the number of clicks
-=======
-
-* The application should display a picture of a cat and a number of clicks.
-* The specifics of the layout do not matter, so style it however you'd like.
 
 ## Interaction
 * When a cat name is clicked in the list, the cat display area should update to show the data for the selected cat.
@@ -22,6 +18,3 @@
 * When the admin button is clicked, the admin area should appear with the inputs filled in for the currently-selected cat.
 * When the cancel button in the admin area is pressed, the admin area disappears.
 * When the save button in the admin area is pressed, the currently-selected cat's values update with the values in the admin area, and the admin area disappears.
-=======
-
-* The number of clicks should increment when the cat picture is clicked.
