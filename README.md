@@ -1,7 +1,6 @@
 # Project Requirements for Cat Clicker
 ## Visuals
 * The application should display
-
 ** a list of cats by name
 ** an area to display the selected cat
 
