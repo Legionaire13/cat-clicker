@@ -1,4 +1,4 @@
-# Project Requirements for Cat Clicker Premium
+# Project Requirements for Cat Clicker Premium Pro
 ## Visuals
 
 * The application should display
